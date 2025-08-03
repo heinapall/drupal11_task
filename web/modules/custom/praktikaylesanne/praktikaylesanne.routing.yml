@@ -1,0 +1,7 @@
+praktikaylesanne.content:
+  path: '/praktikaylesanne'
+  defaults:
+    _controller: '\Drupal\praktikaylesanne\Controller\PraktikaylesanneController::content'
+    _title: 'Praktikaülesanne'
+  requirements:
+    _permission: 'access content'

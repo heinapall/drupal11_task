@@ -1,0 +1,125 @@
+diff --git a/core/modules/node/node.permissions.yml b/core/modules/node/node.permissions.yml
+index e60102b331689193f91266f50748d1563bcd8b46..23769dd6ef77ae72a0adf666e67cf0bee449d016 100644
+--- a/core/modules/node/node.permissions.yml
++++ b/core/modules/node/node.permissions.yml
+@@ -23,6 +23,10 @@ revert all revisions:
+ delete all revisions:
+   title: 'Delete all revisions'
+   description: 'To delete a revision, you also need permission to delete the content item.'
++rebuild node access permissions:
++  title: 'Rebuild content access permissions'
++  description: 'Trigger a content access permission rebuild. This can be a potentially long and disruptive process.'
++  restrict access: true
+ 
+ permission_callbacks:
+   - \Drupal\node\NodePermissions::nodeTypePermissions
+diff --git a/core/modules/node/node.post_update.php b/core/modules/node/node.post_update.php
+index 1781295f69c4ef1c33dd7d42cf6cceab70a9d2aa..632e2a716bac369eba20214b530b8e0f25e479ef 100644
+--- a/core/modules/node/node.post_update.php
++++ b/core/modules/node/node.post_update.php
+@@ -8,6 +8,7 @@
+ use Drupal\Core\Config\Entity\ConfigEntityUpdater;
+ use Drupal\Core\Entity\EntityFieldManagerInterface;
+ use Drupal\node\NodeTypeInterface;
++use Drupal\user\RoleInterface;
+ 
+ /**
+  * Implements hook_removed_post_updates().
+@@ -45,3 +46,16 @@ function node_post_update_create_promote_base_field_overrides(&$sandbox = []): v
+       return $changed;
+     });
+ }
++
++/**
++ * Grants a new permission for rebuilding node access permissions.
++ */
++function node_post_update_add_rebuild_permission_to_roles(?array &$sandbox = NULL): void {
++  \Drupal::classResolver(ConfigEntityUpdater::class)->update($sandbox, 'user_role', function (RoleInterface $role): bool {
++    if ($role->isAdmin() || !$role->hasPermission('administer nodes')) {
++      return FALSE;
++    }
++    $role->grantPermission('rebuild node access permissions');
++    return TRUE;
++  });
++}
+diff --git a/core/modules/node/node.routing.yml b/core/modules/node/node.routing.yml
+index aa53d913cf7eba7bb9ce67f8187f8afdb36f64ad..7a1ae20a873a3a06d3af59d08a1fabc2a0cd6bd9 100644
+--- a/core/modules/node/node.routing.yml
++++ b/core/modules/node/node.routing.yml
+@@ -164,4 +164,4 @@ node.configure_rebuild_confirm:
+   defaults:
+     _form: '\Drupal\node\Form\RebuildPermissionsForm'
+   requirements:
+-    _permission: 'administer nodes'
++    _permission: 'rebuild node access permissions'
+diff --git a/core/modules/node/src/Hook/NodeHooks1.php b/core/modules/node/src/Hook/NodeHooks1.php
+index abbdd668725c555ea4c0015d784671784cfcd479..6eb828a219ea3cf8d79f23d4518b607cceaccf52 100644
+--- a/core/modules/node/src/Hook/NodeHooks1.php
++++ b/core/modules/node/src/Hook/NodeHooks1.php
+@@ -34,7 +34,7 @@ public function help($route_name, RouteMatchInterface $route_match): ?string {
+     // Remind site administrators about the {node_access} table being flagged
+     // for rebuild. We don't need to issue the message on the confirm form, or
+     // while the rebuild is being processed.
+-    if ($route_name != 'node.configure_rebuild_confirm' && $route_name != 'system.batch_page.html' && $route_name != 'help.page.node' && $route_name != 'help.main' && \Drupal::currentUser()->hasPermission('administer nodes') && node_access_needs_rebuild()) {
++    if ($route_name != 'node.configure_rebuild_confirm' && $route_name != 'system.batch_page.html' && $route_name != 'help.page.node' && $route_name != 'help.main' && \Drupal::currentUser()->hasPermission('rebuild node access permissions') && node_access_needs_rebuild()) {
+       if ($route_name == 'system.status') {
+         $message = $this->t('The content access permissions need to be rebuilt.');
+       }
+diff --git a/core/modules/node/tests/src/Functional/NodeAccessRebuildNodeGrantsTest.php b/core/modules/node/tests/src/Functional/NodeAccessRebuildNodeGrantsTest.php
+index da9dccecef041832afa69493a7925af09c2adbf1..afc7e9c3b30d22f21ca3974829dceb956f6e44dd 100644
+--- a/core/modules/node/tests/src/Functional/NodeAccessRebuildNodeGrantsTest.php
++++ b/core/modules/node/tests/src/Functional/NodeAccessRebuildNodeGrantsTest.php
+@@ -45,7 +45,7 @@ protected function setUp(): void {
+       'administer site configuration',
+       'access administration pages',
+       'access site reports',
+-      'administer nodes',
++      'rebuild node access permissions',
+     ]);
+     $this->drupalLogin($this->adminUser);
+ 
+diff --git a/core/modules/node/tests/src/Functional/NodeRebuildPermissionUpdateTest.php b/core/modules/node/tests/src/Functional/NodeRebuildPermissionUpdateTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..46bf120b934a3a63789d7a425f8a74ebed8ebd7c
+--- /dev/null
++++ b/core/modules/node/tests/src/Functional/NodeRebuildPermissionUpdateTest.php
+@@ -0,0 +1,39 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\node\Functional;
++
++use Drupal\FunctionalTests\Update\UpdatePathTestBase;
++use Drupal\user\Entity\Role;
++
++/**
++ * @covers node_post_update_add_rebuild_permission_to_roles
++ * @group node
++ */
++class NodeRebuildPermissionUpdateTest extends UpdatePathTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setDatabaseDumpFiles(): void {
++    $this->databaseDumpFiles = [
++      __DIR__ . '/../../../../system/tests/fixtures/update/drupal-10.3.0.bare.standard.php.gz',
++    ];
++  }
++
++  /**
++   * Tests an update path for 'rebuild node access permissions' permission.
++   */
++  public function testRunUpdates(): void {
++    // Grant auth user with 'administer nodes' permission. And check
++    // if the new permission is added after the post_update hook is executed.
++    $this->grantPermissions(
++      Role::load(Role::AUTHENTICATED_ID),
++      ['administer nodes']
++    );
++    $this->runUpdates();
++    $this->assertTrue(Role::load(Role::AUTHENTICATED_ID)->hasPermission('rebuild node access permissions'));
++  }
++
++}

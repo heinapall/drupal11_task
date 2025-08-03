@@ -1,0 +1,5 @@
+name: 'Praktikaylesanne'
+type: module
+description: 'Praktikaylesanne custom moodul Drupal 11 jaoks.'
+core_version_requirement: ^11
+package: Custom

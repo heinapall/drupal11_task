@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * praktikaylesanne.module – sisaldab hooke.
+ */
+
+function praktikaylesanne_theme($existing, $type, $theme, $path) {
+  return [
+    'praktikaylesanne_template' => [
+      'variables' => [
+        'time_spent' => NULL,
+        'experience' => NULL,
+        'hardest_part' => NULL,
+        'learned' => NULL,
+        'delivery_date' => NULL,
+      ],
+      'template' => 'praktikaylesanne',
+      'path' => $path . '/templates',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_html_head_alter().
+ * Eemaldab Drupali meta generatori tagi.
+ */
+function praktikaylesanne_html_head_alter(array &$head_elements) {
+  foreach ($head_elements as $key => $element) {
+    if (
+      isset($element['#tag']) &&
+      $element['#tag'] === 'meta' &&
+      isset($element['#attributes']['name']) &&
+      strtolower($element['#attributes']['name']) === 'generator'
+    ) {
+      unset($head_elements[$key]);
+    }
+  }
+}
