@@ -1,0 +1,20 @@
+uuid: 89760584-96bc-46e1-8505-6905b9a426d0
+langcode: et
+status: true
+dependencies:
+  theme:
+    - claro
+_core:
+  default_config_hash: fNwDdW063tk_ktzSWzZVeQS9wzvLooVO280BQ9WrsIs
+id: claro_page_title
+theme: claro
+region: header
+weight: -30
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Lehe pealkiri'
+  label_display: '0'
+  provider: core
+visibility: {  }

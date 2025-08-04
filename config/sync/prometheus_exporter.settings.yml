@@ -1,0 +1,39 @@
+_core:
+  default_config_hash: JEvrMtaLV6jrNEl_8dcLKJAIbieIcG_hswRjfPHqS9o
+collectors:
+  node_count:
+    id: node_count
+    provider: prometheus_exporter
+    enabled: true
+    weight: 0
+    settings:
+      bundles:
+        article: 0
+        page: 0
+  phpinfo:
+    id: phpinfo
+    provider: prometheus_exporter
+    enabled: true
+    weight: 0
+    settings: {  }
+  queue_size:
+    id: queue_size
+    provider: prometheus_exporter
+    enabled: true
+    weight: 0
+    settings: {  }
+  revision_count:
+    id: revision_count
+    provider: prometheus_exporter
+    enabled: true
+    weight: 0
+    settings:
+      bundles:
+        article: 0
+        page: 0
+  user_count:
+    id: user_count
+    provider: prometheus_exporter
+    enabled: true
+    weight: 0
+    settings: {  }

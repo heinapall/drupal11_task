@@ -1,0 +1,13 @@
+uuid: 66e52166-2d05-4551-8491-5aeeaaff6f7c
+langcode: et
+status: true
+dependencies:
+  module:
+    - user
+_core:
+  default_config_hash: 1TFiplNN7Wmj_DtVLLLP-NLPYpZJdAswKY-vTrYgFyo
+id: user.register
+label: Registreeru
+description: null
+targetEntityType: user
+cache: true

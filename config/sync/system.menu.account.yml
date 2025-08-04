@@ -1,0 +1,10 @@
+uuid: b393b4b5-5ec2-42d5-830d-70b0b60c6fac
+langcode: et
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: M_Bh81osDyUQ4wV0GgU_NdBNqkzM87sLxjaCdFj9mnw
+id: account
+label: 'Kasutaja konto menüü'
+description: 'Aktiivse kasutajaga seotud lingid'
+locked: true

@@ -1,0 +1,13 @@
+uuid: 09e5ec24-99fb-4fb0-8a47-8b43b37898d1
+langcode: et
+status: true
+dependencies:
+  module:
+    - taxonomy
+_core:
+  default_config_hash: iukUENpf8CFvjZbGGacKX_Ges0-lU9z6zvsd32P6kbo
+id: taxonomy_term.full
+label: 'Taksonoomia termini lehekülg'
+description: ''
+targetEntityType: taxonomy_term
+cache: true

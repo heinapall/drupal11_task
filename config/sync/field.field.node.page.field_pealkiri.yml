@@ -1,0 +1,19 @@
+uuid: 9354ed7e-0f1c-4dea-a9ae-40065a991df0
+langcode: et
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pealkiri
+    - node.type.page
+id: node.page.field_pealkiri
+field_name: field_pealkiri
+entity_type: node
+bundle: page
+label: Pealkiri
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

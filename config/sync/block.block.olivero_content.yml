@@ -1,0 +1,22 @@
+uuid: 827ede4e-9725-42ce-9c5a-1682045df2ec
+langcode: et
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - olivero
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: olivero_content
+theme: olivero
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Lehekülje sisuosa'
+  label_display: '0'
+  provider: system
+visibility: {  }

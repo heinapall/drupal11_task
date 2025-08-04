@@ -1,0 +1,11 @@
+uuid: 3c0c0515-0e64-488a-a091-27d52b34bc91
+langcode: et
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: eNX6lLCKDaY83nCMh20My---y03KbiFlv802DKCCpvg
+id: und
+label: Määratlemata
+direction: ltr
+weight: 2
+locked: true

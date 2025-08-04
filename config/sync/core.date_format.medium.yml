@@ -1,0 +1,10 @@
+uuid: 67a9858c-fd75-4a61-889c-b4d03c602ab6
+langcode: et
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: q7pDV2d9qFh1IVqvymOxUUYGSziZDeg961wURC0cSLs
+id: medium
+label: 'Vaikimisi keskmine kuupäevaformaat'
+locked: false
+pattern: 'D, j M Y - H:i'

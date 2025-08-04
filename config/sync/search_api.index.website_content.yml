@@ -1,0 +1,66 @@
+uuid: bdd9df74-d985-4cc6-befa-5e15cb044455
+langcode: et
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - field.storage.node.field_kokkuvote
+    - search_api.server.ddev_elasticsearch_server
+  module:
+    - node
+id: website_content
+name: 'Website content'
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Sisu
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  field_kokkuvote:
+    label: Kokkuvõte
+    datasource_id: 'entity:node'
+    property_path: field_kokkuvote
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_kokkuvote
+  title:
+    label: Pealkiri
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - article
+        - page
+    languages:
+      default: false
+      selected:
+        - et
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  custom_value: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  delete_on_fail: true
+  index_directly: true
+  track_changes_in_references: true
+server: ddev_elasticsearch_server

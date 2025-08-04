@@ -1,0 +1,13 @@
+uuid: 16c17ff0-fb71-489c-8cc1-afd72c93b3b3
+langcode: et
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: KgGJDZFpMaz_8bTv6fN1bXS3Qi5LWmRJI9R53kEGsNQ
+id: node.teaser
+label: Juhtlõik
+description: ''
+targetEntityType: node
+cache: true

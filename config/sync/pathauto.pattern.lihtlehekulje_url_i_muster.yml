@@ -1,0 +1,22 @@
+uuid: 9d7ae380-275b-46c3-93ba-169d53f3d345
+langcode: et
+status: true
+dependencies:
+  module:
+    - node
+id: lihtlehekulje_url_i_muster
+label: 'Lihtlehekülje URL-i muster'
+type: 'canonical_entities:node'
+pattern: 'lehekülg/[node:title]'
+selection_criteria:
+  0f721692-a247-4af1-a9cb-a4cbcd3cd62a:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 0f721692-a247-4af1-a9cb-a4cbcd3cd62a
+    context_mapping:
+      node: node
+    bundles:
+      page: page
+selection_logic: and
+weight: -5
+relationships: {  }

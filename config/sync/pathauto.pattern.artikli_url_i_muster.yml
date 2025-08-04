@@ -1,0 +1,22 @@
+uuid: c7d05f3b-7e99-494f-bad0-e8ab7d336bd2
+langcode: et
+status: true
+dependencies:
+  module:
+    - node
+id: artikli_url_i_muster
+label: 'Artikli URL-i muster'
+type: 'canonical_entities:node'
+pattern: 'artikkel/[node:title]'
+selection_criteria:
+  cea43f0b-5ee0-48a8-8bf7-a8aff2df5b25:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: cea43f0b-5ee0-48a8-8bf7-a8aff2df5b25
+    context_mapping:
+      node: node
+    bundles:
+      article: article
+selection_logic: and
+weight: -5
+relationships: {  }

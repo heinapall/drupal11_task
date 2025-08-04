@@ -1,0 +1,13 @@
+uuid: d32a48b0-c025-4a45-8ac5-2c417d81445e
+langcode: et
+status: false
+dependencies:
+  module:
+    - comment
+_core:
+  default_config_hash: N4mUjXpPckUkVRY1PbKw4GGoL1i2ECU7PL3EreiKStk
+id: comment.full
+label: Kommentaar
+description: ''
+targetEntityType: comment
+cache: true

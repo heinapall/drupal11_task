@@ -1,0 +1,10 @@
+uuid: 58de3cc8-7715-435b-a047-9b33c775e2a0
+langcode: et
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: wKD4WsoV_wFgv2vgI4mcAAFSIzrye17ykzdwrnApkfY
+id: html_week
+label: 'HTML Nädal'
+locked: true
+pattern: Y-\WW

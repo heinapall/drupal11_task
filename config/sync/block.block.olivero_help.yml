@@ -1,0 +1,22 @@
+uuid: 68ed621b-df81-4b27-9796-0b32d8fe631e
+langcode: et
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - olivero
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: olivero_help
+theme: olivero
+region: content_above
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Abi
+  label_display: '0'
+  provider: help
+visibility: {  }

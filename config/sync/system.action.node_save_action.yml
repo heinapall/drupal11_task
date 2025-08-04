@@ -1,0 +1,13 @@
+uuid: 2efe1942-8f13-471d-8b1a-3f0468828359
+langcode: et
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: LhdsoZPL_pFas2fjaAWue4zvrQ_tEVofLYtcNec-JGM
+id: node_save_action
+label: 'Sisu salvestamine'
+type: node
+plugin: 'entity:save_action:node'
+configuration: {  }

@@ -1,0 +1,19 @@
+uuid: 6db20a9e-965a-4508-b068-ccf4c4382684
+langcode: et
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_kokkuvote
+field_name: field_kokkuvote
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

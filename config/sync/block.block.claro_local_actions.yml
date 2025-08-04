@@ -1,0 +1,20 @@
+uuid: f32ec3f3-80bb-46b2-8b5f-0ba60674eed0
+langcode: et
+status: true
+dependencies:
+  theme:
+    - claro
+_core:
+  default_config_hash: CdXfDmRgAvms7EQovxxWPdYi0GitxeRbVtScYK16ZH0
+id: claro_local_actions
+theme: claro
+region: content
+weight: -10
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Peamised administraatori toimingud'
+  label_display: '0'
+  provider: core
+visibility: {  }

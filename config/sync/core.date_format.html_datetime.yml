@@ -1,0 +1,10 @@
+uuid: 0cc4bc8b-f554-448b-bd07-0bb03a76f897
+langcode: et
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: jxfClwZIRXIdcvMrE--WkcZxDGUVoOIE3Sm2NRZlFuE
+id: html_datetime
+label: 'HTML Kuupäev ja kellaaeg'
+locked: true
+pattern: 'Y-m-d\TH:i:sO'

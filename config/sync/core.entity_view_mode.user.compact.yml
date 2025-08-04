@@ -1,0 +1,13 @@
+uuid: bbb9668b-badd-4b7a-9978-f45c1b61c3aa
+langcode: et
+status: true
+dependencies:
+  module:
+    - user
+_core:
+  default_config_hash: TtD7OuGskOsQfoGyxXkrdtllBpR37J19d5BMQDZWJgA
+id: user.compact
+label: Kompaktne
+description: ''
+targetEntityType: user
+cache: true
